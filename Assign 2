@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Page</title>
+
+    <!-- Link to external CSS file for styling -->
+    <link rel="stylesheet" href="css/styles.css">
+
+    <!-- Link to external JavaScript file, with "defer" to ensure it loads after the HTML is parsed -->
+    <script src="js/scripts.js" defer></script>
+</head>
+<body>
+    <!-- Main container for the page -->
+    <div class="container">
+        
+        <!-- Button to change the background color based on custom input -->
+        <button id="changeColorBtn">Change Custom Color</button>
+        
+        <!-- Button to change the background color based on a random number -->
+        <button id="randomColorBtn">Change Random Color</button>
+
+        <!-- Input field for user to enter a custom number (0-100) -->
+        <input type="number" id="inputNumber" placeholder="Enter a number (0-100)">
+        
+        <!-- Paragraph to display the student ID -->
+        <p id="studentId">Your Student ID: </p>
+        
+        <!-- Dropdown menu to select an image -->
+        <select id="imageSelect">
+            <option value="">Select an image</option>
+        </select>
+
+        <!-- Placeholder for displaying the selected image -->
+        <img id="selectedImage" src="" alt="Image" style="max-width: 300px; margin-top: 20px;">
+    </div>
+</body>
+</html>
+/* General body styling */
+body {
+    font-family: Arial, sans-serif; /* Set font family */
+    text-align: center; /* Center content */
+    margin: 0; /* Remove default margin */
+    padding: 0; /* Remove default padding */
+    transition: background-color 0.5s ease; /* Smooth transition for background color change */
+}
+
+/* Container styling */
+.container {
+    margin-top: 50px; /* Space from the top of the page */
+}
+
+/* Styling for buttons */
+button {
+    margin: 10px; /* Space around buttons */
+    padding: 10px 20px; /* Padding inside buttons */
+    font-size: 16px; /* Font size */
+    cursor: pointer; /* Pointer cursor on hover */
+    border: none; /* Remove border */
+    border-radius: 5px; /* Rounded corners */
+    background-color: #4CAF50; /* Green background */
+    color: white; /* White text */
+}
+
+/* Button hover effect */
+button:hover {
+    background-color: #45a049; /* Darker green when hovered */
+}
+
+/* Styling for input field */
+input[type="number"] {
+    padding: 10px; /* Padding inside the input field */
+    font-size: 16px; /* Font size */
+    margin-top: 10px; /* Space from the top */
+    border-radius: 5px; /* Rounded corners */
+    border: 1px solid #ccc; /* Light grey border */
+}
+
+/* Styling for the select dropdown */
+select {
+    margin-top: 20px; /* Space from the top */
+    padding: 10px; /* Padding inside the dropdown */
+    font-size: 16px; /* Font size */
+}
+
+/* Styling for student ID text */
+#studentId {
+    font-size: 18px; /* Larger font size for the student ID */
+    font-weight: bold; /* Make text bold */
+    margin-top: 10px; /* Space from the top */
+}
+// Store image file paths in an array
+const images = [
+    'img/image1.jpg', // Image 1 path
+    'img/image2.jpg', // Image 2 path
+    'img/image3.jpg', // Image 3 path
+    'img/image4.jpg'  // Image 4 path
+];
+
+// Get references to HTML elements for easier manipulation
+const changeColorBtn = document.getElementById('changeColorBtn');  // Button to change custom color
+const randomColorBtn = document.getElementById('randomColorBtn');  // Button to change random color
+const inputNumber = document.getElementById('inputNumber');  // Input field for user number
+const studentIdDisplay = document.getElementById('studentId');  // Paragraph to display student ID
+const imageSelect = document.getElementById('imageSelect');  // Select dropdown for image selection
+const selectedImage = document.getElementById('selectedImage');  // Image element to display selected image
+
+// Handle the "Change Custom Color" button click
+changeColorBtn.addEventListener('click', () => {
+    const number = parseInt(inputNumber.value);  // Parse the user input as an integer
+    const studentId = '123456';  // Your student ID (change it accordingly)
+
+    // Display the student ID in the paragraph
+    studentIdDisplay.textContent = `Your Student ID: ${studentId}`;
+
+    // Determine the background color based on the input number
+    if (number < 0 || number > 100) {
+        document.body.style.backgroundColor = 'red';  // Outside valid range: red
+    } else if (number >= 0 && number < 20) {
+        document.body.style.backgroundColor = 'green';  // Between 0 and 20: green
+    } else if (number >= 20 && number < 40) {
+        document.body.style.backgroundColor = 'blue';  // Between 20 and 40: blue
+    } else if (number >= 40 && number < 60) {
+        document.body.style.backgroundColor = 'orange';  // Between 40 and 60: orange
+    } else if (number >= 60 && number < 80) {
+        document.body.style.backgroundColor = 'purple';  // Between 60 and 80: purple
+    } else if (number >= 80 && number <= 100) {
+        document.body.style.backgroundColor = 'yellow';  // Between 80 and 100: yellow
+    }
+});
+
+// Handle the "Change Random Color" button click
+randomColorBtn.addEventListener('click', () => {
+    const randomNumber = Math.floor(Math.random() * 101);  // Generate a random number between 0 and 100
+    const studentId = '123456';  // Your student ID (change it accordingly)
+
+    // Display the student ID in the paragraph
+    studentIdDisplay.textContent = `Your Student ID: ${studentId}`;
+
+    // Change background color based on the random number generated
+    if (randomNumber < 0 || randomNumber > 100) {
+        document.body.style.backgroundColor = 'red';  // Outside valid range: red
+    } else if (randomNumber >= 0 && randomNumber < 20) {
+        document.body.style.backgroundColor = 'green';  // Between 0 and 20: green
+    } else if (randomNumber >= 20 && randomNumber < 40) {
+        document.body.style.backgroundColor = 'blue';  // Between 20 and 40: blue
+    } else if (randomNumber >= 40 && randomNumber < 60) {
+        document.body.style.backgroundColor = 'orange';  // Between 40 and 60: orange
+    } else if (randomNumber >= 60 && randomNumber < 80) {
+        document.body.style.backgroundColor = 'purple';  // Between 60 and 80: purple
+    } else if (randomNumber >= 80 && randomNumber <= 100) {
+        document.body.style.backgroundColor = 'yellow';  // Between 80 and 100: yellow
+    }
+});
+
+// Populate the select dropdown with image names dynamically
+images.forEach((imagePath, index) => {
+    const option = document.createElement('option');  // Create a new option element
+    option.value = imagePath;  // Set the value to the image path
+    option.textContent = `Image ${index + 1}`;  // Display "Image 1", "Image 2", etc.
+    imageSelect.appendChild(option);  // Add the option to the dropdown
+});
+
+// Handle the select change event to display the selected image
+imageSelect.addEventListener('change', (e) => {
+    const selectedImagePath = e.target.value;  // Get the selected image path from the dropdown
+    if (selectedImagePath) {
+        selectedImage.src = selectedImagePath;  // Set the image source to the selected path
+    }
+});
